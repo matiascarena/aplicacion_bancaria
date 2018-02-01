@@ -8,7 +8,7 @@
 ------------------
 
 CREATE TABLE contact_information (
-         dni           text NOT NULL REFERENCES person(dni),
+         dni           text NOT NULL REFERENCES person(dni),,
          phone         text,
          mobile        text,
          email         text 
@@ -34,7 +34,7 @@ BEGIN
 		       
 		       RETURN v_contact_information;
 		ELSE
-		    RAISE EXCEPTION 'YA EXISTE UNA PERSONA CON ESE CONTACTO'
+		    RAISE EXCEPTION 'YA EXISTE UNA PERSONA CON ESE CONTACTO';
 		END IF;
 END;
 $$ LANGUAGE PLpgSQL VOLATILE
@@ -47,11 +47,9 @@ SET search_path FROM CURRENT;
 CREATE OR REPLACE FUNCTION contact_information_destroy (
 	IN p_contact_information            contact_information
 ) RETURNS void AS $$
-BEGIN
-	
-	DELETE FROM contact_information x WHERE x = p_contact_information;
-END;
-	
+BEGIN	
+	EXECUTE 'DELETE FROM contact_information x WHERE x = ' || p_contact_information || ';';
+END;	
 $$ LANGUAGE PLpgSQL VOLATILE STRICT
 SET search_path FROM CURRENT;
 
@@ -63,7 +61,7 @@ CREATE OR REPLACE FUNCTION contact_information_identify_by_dni (
 	IN p_dni         text
 ) RETURNS contact_information AS $$
 BEGIN
-	SELECT * FROM location WHERE dni = p_dni;
+	EXECUTE 'SELECT * FROM location WHERE dni = ' || p_dni || ';';
 END;
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -77,7 +75,7 @@ CREATE OR REPLACE FUNCTION contact_information_get_phone (
 	IN p_contact_information            contact_information
 ) RETURNS text AS $$
 BEGIN
-	SELECT p_contact_information.phone;
+	EXECUTE 'SELECT ' || p_contact_information.phone || ';';
 END;
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -104,7 +102,7 @@ CREATE OR REPLACE FUNCTION contact_information_get_mobile (
 	IN p_contact_information            contact_information
 ) RETURNS text AS $$
 BEGIN
-	SELECT p_contact_information.mobile;
+	EXECUTE 'SELECT ' || p_contact_information.mobile || ';';
 END;
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -130,7 +128,7 @@ CREATE OR REPLACE FUNCTION contact_information_get_email (
 	IN p_contact_information            contact_information
 ) RETURNS text AS $$
 BEGIN
-	SELECT p_contact_information.email;
+	EXECUTE 'SELECT ' || p_contact_information.email || ';';
 END;
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
