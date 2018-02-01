@@ -23,10 +23,7 @@ DECLARE
 BEGIN 
       IF NOT EXISTS (SELECT 1 FROM person WHERE dni = p_dni)
       THEN
-		  EXECUTE 'INSERT INTO person(name, surname, dni, birthday, nationality) 
-VALUES (''' || p_name || ''', ''' || p_surname || ''', ''' || p_dni 
-|| ''', '''  || birthday || ''', ''' || nationality || ''') RETURNING *' INTO 
-v_person;
+		  EXECUTE 'INSERT INTO person(name, surname, dni, birthday, nationality) VALUES (''' || p_name || ''', ''' || p_surname || ''', ''' || p_dni || ''', '''  || birthday || ''', ''' || nationality || ''') RETURNING *' INTO v_person;
 		  
 		  RETURN v_person;
 	  ELSE
