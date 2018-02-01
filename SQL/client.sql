@@ -7,18 +7,19 @@
 ------------------
 
 CREATE TABLE client (
-      client_id    serial NOT NUL,
-      type          client_type NOT NULL DEFAULT 'REGULAR',
+      client_id    serial NOT NULL
+      type          client_type NOT NULL DEFAULT 'REGULAR'
 );
 
 ------------------
 -- CONSTRUCTOR
 ------------------
 
-CREATE OR REPLACE FUNCION client (
+CREATE OR REPLACE FUNCTION client (
 	IN p_type   text,
 	IN p_account     account,
 	IN p_person      person
+
 ) RETURNS client AS $$
 DECLARE
     v_client     client;
@@ -40,9 +41,9 @@ SET search_path FROM CURRENT;
 --------------------
 CREATE OR REPLACE FUNCTION client_identify_by_client_id (
 	IN p_client_id        text
-) RETURNS location_information AS $$
+) RETURNS client AS $$
 BEGIN 
-	SELECT * FROM client WHERE client_id = p_client_id;
+	EXECUTE 'SELECT * FROM client WHERE client_id =  ' || p_client_id || ';';
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -52,18 +53,18 @@ SET search_path FROM CURRENT;
 --------------------
 CREATE OR REPLACE FUNCTION client_get_client_id (
 	IN p_client            client
-) RETURNS integer $$
+) RETURNS integer AS $$
 BEGIN 
-	SELECT p_client.client_id;
+	EXECUTE 'SELECT ' || p_client.client_id || ';';
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION client_get_type (
 	IN p_client            client
-) RETURNS text $$
+) RETURNS text AS $$
 BEGIN 
-	SELECT p_client.type;
+	EXECUTE 'SELECT ' || p_client.type || ';';
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
