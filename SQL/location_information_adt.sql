@@ -60,7 +60,7 @@ CREATE OR REPLACE FUNCTION location_information_identify_by_dni (
 	IN p_dni         text
 ) RETURNS location_information AS $$
 BEGIN 
-	EXECUTE 'SELECT * FROM location_information WHERE dni =' || p_dni || ';'
+	SELECT * FROM location_information WHERE dni = p_dni;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -72,7 +72,7 @@ CREATE OR REPLACE FUNCTION location_information_get_address (
 	IN p_location_information            location_information
 ) RETURNS text AS $$
 BEGIN 
-	EXECUTE 'SELECT' || p_location_information.address || ';'
+	SELECT p_location_information.address;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -96,7 +96,7 @@ CREATE OR REPLACE FUNCTION location_information_get_zipcode (
 	IN p_location_information            location_information
 ) RETURNS text AS $$
 BEGIN 
-	EXECUTE 'SELECT' || p_location_information.zipcode || ';'
+	SELECT p_location_information.zipcode;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -120,7 +120,7 @@ CREATE OR REPLACE FUNCTION location_information_get_province (
 	IN p_location_information            location_information
 ) RETURNS text AS $$
 BEGIN 
-	EXECUTE 'SELECT' || p_location_information.province || ';'
+	SELECT p_location_information.province;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -144,7 +144,7 @@ CREATE OR REPLACE FUNCTION location_information_get_country (
 	IN p_location_information            location_information
 ) RETURNS text AS $$
 BEGIN 
-	EXECUTE 'SELECT' || p_location_information.country || ';'
+	SELECT p_location_information.country ;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
