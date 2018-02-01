@@ -28,13 +28,9 @@ CREATE OR REPLACE FUNCTION contact_information (
 DECLARE 
         v_contact_information     contact_information;
 BEGIN 
-		IF NOT EXISTS (SELECT 1 FROM contact_information WHERE dni = 
-p_dni)
+		IF NOT EXISTS (SELECT 1 FROM contact_information WHERE dni = p_dni)
 		THEN
-			EXECUTE 'INSERT INTO Contact_information(phone, mobile, 
-email)
-		       VALUES (''' || p_dni || ''',''' || p_phone || ''', ''' || 
-p_mobile || ''', ''' || p_email ||''') RETURNING *' INTO v_contact_information;
+			EXECUTE 'INSERT INTO Contact_information(phone, mobile, email) VALUES (''' || p_dni || ''',''' || p_phone || ''', ''' || p_mobile || ''', ''' || p_email ||''') RETURNING *' INTO v_contact_information;
 		       
 		       RETURN v_contact_information;
 		ELSE
@@ -96,8 +92,7 @@ BEGIN
 	IF EXISTS (SELECT 1 FROM contact_information WHERE dni = 
 p_contact_information.dni)
 	THEN 
-		UPDATE contact_information SET phone = p_phone WHERE dni = 
-p_contact_information.dni;
+		UPDATE contact_information SET phone = p_phone WHERE dni = p_contact_information.dni;
 	ELSE 
 		RAISE EXCEPTION 'NO EXISTE EL CONTACTO INDICADO';
 	END IF;
@@ -121,11 +116,9 @@ CREATE OR REPLACE FUNCTION contact_information_set_mobile (
 	IN p_mobile                          text
 ) RETURNS void AS $$
 BEGIN 
-	IF EXISTS (SELECT 1 FROM contact_information WHERE dni = 
-p_contact_information.dni)
+	IF EXISTS (SELECT 1 FROM contact_information WHERE dni = p_contact_information.dni)
 	THEN 
-		UPDATE contact_information SET mobile = p_mobile WHERE dni = 
-p_contact_information.dni;
+		UPDATE contact_information SET mobile = p_mobile WHERE dni = p_contact_information.dni;
 	ELSE 
 		RAISE EXCEPTION 'NO EXISTE EL CONTACTO INDICADO';
 	END IF;
@@ -149,11 +142,9 @@ CREATE OR REPLACE FUNCTION contact_information_set_email (
 	IN p_email                          text
 ) RETURNS void AS $$
 BEGIN 
-	IF EXISTS (SELECT 1 FROM contact_information WHERE dni = 
-p_contact_information.dni)
+	IF EXISTS (SELECT 1 FROM contact_information WHERE dni = p_contact_information.dni)
 	THEN 
-		UPDATE contact_information SET email = p_email WHERE dni = 
-p_contact_information.dni;
+		UPDATE contact_information SET email = p_email WHERE dni = p_contact_information.dni;
 	ELSE 
 		RAISE EXCEPTION 'NO EXISTE EL CONTACTO INDICADO';
 	END IF;
