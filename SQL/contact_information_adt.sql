@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION contact_information_destroy (
 ) RETURNS void AS $$
 BEGIN
 	
-	EXECUTE 'DELETE FROM contact_information x WHERE x =' || p_contact_information || ';' 
+	EXECUTE 'DELETE FROM contact_information x WHERE x = ' || p_contact_information || ';' 
 END;
 	
 $$ LANGUAGE PLpgSQL VOLATILE STRICT
@@ -63,7 +63,7 @@ CREATE OR REPLACE FUNCTION contact_information_identify_by_dni (
 	IN p_dni         text
 ) RETURNS contact_information AS $$
 BEGIN
-	EXECUTE 'SELECT * FROM location WHERE dni =' || p_dni || ';'
+	EXECUTE 'SELECT * FROM location WHERE dni = ' || p_dni || ';'
 END;
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
