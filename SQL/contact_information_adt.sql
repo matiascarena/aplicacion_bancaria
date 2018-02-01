@@ -86,8 +86,7 @@ CREATE OR REPLACE FUNCTION contact_information_set_phone (
 	IN p_phone                          text
 ) RETURNS void AS $$
 BEGIN 
-	IF EXISTS (SELECT 1 FROM contact_information WHERE dni = 
-p_contact_information.dni)
+	IF EXISTS (SELECT 1 FROM contact_information WHERE dni = p_contact_information.dni)
 	THEN 
 		UPDATE contact_information SET phone = p_phone WHERE dni = p_contact_information.dni;
 	ELSE 
