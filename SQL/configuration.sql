@@ -1,0 +1,1 @@
+CREATE TYPE client_type AS ENUM('REGULAR', 'VIP');
