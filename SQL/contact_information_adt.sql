@@ -30,7 +30,7 @@ DECLARE
 BEGIN 
 		IF NOT EXISTS (SELECT 1 FROM contact_information WHERE dni = p_dni)
 		THEN
-			EXECUTE 'INSERT INTO Contact_information(phone, mobile, email) VALUES (''' || p_dni || ''',''' || p_phone || ''', ''' || p_mobile || ''', ''' || p_email ||''') RETURNING *' INTO v_contact_information;
+			EXECUTE 'INSERT INTO contact_information(phone, mobile, email) VALUES (''' || p_phone || ''', ''' || p_mobile || ''', ''' || p_email ||''') RETURNING *' INTO v_contact_information;
 		       
 		       RETURN v_contact_information;
 		ELSE
