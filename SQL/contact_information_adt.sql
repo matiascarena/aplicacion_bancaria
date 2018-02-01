@@ -49,8 +49,7 @@ CREATE OR REPLACE FUNCTION contact_information_destroy (
 ) RETURNS void AS $$
 BEGIN
 	
-	EXECUTE 'DELETE FROM contact_information x WHERE x =' || 
-p_contact_information || ';' 
+	EXECUTE 'DELETE FROM contact_information x WHERE x =' || p_contact_information || ';' 
 END;
 	
 $$ LANGUAGE PLpgSQL VOLATILE STRICT
