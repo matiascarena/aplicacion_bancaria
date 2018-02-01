@@ -18,7 +18,7 @@ CREATE TABLE location_information (
 -- CONSTRUCTOR
 ------------------
 
-CREATE OR REPLACE FUNCION location_information (
+CREATE OR REPLACE FUNCTION location_information (
 	IN p_dni          text,
 	IN p_address      text,
 	IN p_zipcode      text,
@@ -70,7 +70,7 @@ SET search_path FROM CURRENT;
 --------------------
 CREATE OR REPLACE FUNCTION location_information_get_address (
 	IN p_location_information            location_information
-) RETURNS text $$
+) RETURNS text AS $$
 BEGIN 
 	EXECUTE 'SELECT' || p_location_information.address || ';'
 END
@@ -94,7 +94,7 @@ SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION location_information_get_zipcode (
 	IN p_location_information            location_information
-) RETURNS text $$
+) RETURNS text AS $$
 BEGIN 
 	EXECUTE 'SELECT' || p_location_information.zipcode || ';'
 END
@@ -118,7 +118,7 @@ SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION location_information_get_province (
 	IN p_location_information            location_information
-) RETURNS text $$
+) RETURNS text AS $$
 BEGIN 
 	EXECUTE 'SELECT' || p_location_information.province || ';'
 END
@@ -142,7 +142,7 @@ SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION location_information_get_country (
 	IN p_location_information            location_information
-) RETURNS text $$
+) RETURNS text AS $$
 BEGIN 
 	EXECUTE 'SELECT' || p_location_information.country || ';'
 END
