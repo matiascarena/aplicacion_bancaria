@@ -41,7 +41,7 @@ CREATE OR REPLACE FUNCTION student_identify_by_dni (
 	IN p_dni                 text
 ) RETURNS person AS $$
 BEGIN
-		 EXECUTE 'SELECT * FROM student WHERE dni = ' || p_dni || ';'
+		 SELECT * FROM student WHERE dni = p_dni;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -50,7 +50,7 @@ CREATE OR REPLACE FUNCTION person_lookup_by_name (
 	IN p_name               text
 ) RETURNS SETOF person AS $$
 BEGIN
-	EXECUTE 'SELECT * FROM student WHERE name = ' || p_name || ';'
+	SELECT * FROM student WHERE name = p_name;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -59,7 +59,7 @@ CREATE OR REPLACE FUNCTION person_lookup_by_surname (
 	IN p_surname               text
 ) RETURNS SETOF person AS $$
 BEGIN
-	EXECUTE 'SELECT * FROM student WHERE surname = ' || p_surname || ';'
+	SELECT * FROM student WHERE surname =  p_surname;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -68,7 +68,7 @@ CREATE OR REPLACE FUNCTION person_lookup_by_birthday (
 	IN p_birthday            text
 ) RETURNS SETOF person AS $$
 BEGIN
-	EXECUTE 'SELECT * FROM student WHERE birthday = ' || p_birthday || ';'
+	SELECT * FROM student WHERE birthday = p_birthday;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -77,7 +77,7 @@ CREATE OR REPLACE FUNCTION person_lookup_by_nationality  (
 	IN p_nationality           text
 ) RETURNS SETOF person AS $$
 BEGIN
-	EXECUTE 'SELECT * FROM student WHERE nationality  = ' || p_nationality || ';'
+	SELECT * FROM student WHERE nationality  = p_nationality ;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -90,7 +90,7 @@ CREATE OR REPLACE FUNCTION person_get_dni (
 	IN p_person             person
 ) RETURNS text AS $$
 BEGIN
-	EXECUTE 'SELECT' || p_person.dni || ';'
+	SELECT p_person.dni;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -100,7 +100,7 @@ CREATE OR REPLACE FUNCTION person_get_name (
 	IN p_person             person
 ) RETURNS text AS $$
 BEGIN
-	EXECUTE 'SELECT' || p_person.name || ';'
+	SELECT p_person.name;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -110,7 +110,7 @@ CREATE OR REPLACE FUNCTION person_get_surname (
 	IN p_person             person
 ) RETURNS text AS $$
 BEGIN
-	EXECUTE 'SELECT' || p_person.surname || ';'
+	SELECT p_person.surname;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -120,7 +120,7 @@ CREATE OR REPLACE FUNCTION person_get_birthday (
 	IN p_person             person
 ) RETURNS text AS $$
 BEGIN
-	EXECUTE 'SELECT' || p_person.birthday || ';'
+	SELECT p_person.birthday;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -130,7 +130,7 @@ CREATE OR REPLACE FUNCTION person_get_nationality (
 	IN p_person             person
 ) RETURNS text AS $$
 BEGIN
-	EXECUTE 'SELECT' || p_person.nationality || ';'
+	SELECT p_person.nationality;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
