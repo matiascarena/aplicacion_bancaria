@@ -43,8 +43,8 @@ CREATE OR REPLACE FUNCTION client_identify_by_client_id (
 	IN p_client_id        text
 ) RETURNS client AS $$
 BEGIN 
-	EXECUTE 'SELECT * FROM client WHERE client_id =  ' || p_client_id || ';';
-END
+	SELECT * FROM client WHERE client_id =  p_client_id;
+END;
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
 
@@ -53,9 +53,9 @@ SET search_path FROM CURRENT;
 --------------------
 CREATE OR REPLACE FUNCTION client_get_client_id (
 	IN p_client            client
-) RETURNS integer AS $$
+) RETURNS text AS $$
 BEGIN 
-	EXECUTE 'SELECT ' || p_client.client_id || ';';
+	SELECT p_client.client_id;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -64,7 +64,7 @@ CREATE OR REPLACE FUNCTION client_get_type (
 	IN p_client            client
 ) RETURNS text AS $$
 BEGIN 
-	EXECUTE 'SELECT ' || p_client.type || ';';
+	SELECT p_client.type;
 END
 $$ LANGUAGE PLpgSQL STABLE STRICT
 SET search_path FROM CURRENT;
@@ -83,4 +83,3 @@ BEGIN
 END;
 $$ LANGUAGE PLpgSQL VOLATILE STRICT
 SET search_path FROM CURRENT;
-
